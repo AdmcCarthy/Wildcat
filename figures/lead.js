@@ -14,7 +14,7 @@ export default function create(el, { lead: L }, opts = {}) {
   function draw(width) {
     W = width;
     const C = pal(), narrow = W < 560;
-    const H = Math.round(Math.max(300, Math.min(W * 0.55, 460))), m = { t: 30, r: 14, b: 32, l: 44 };
+    const H = Math.round(narrow ? Math.max(200, Math.min(W * 0.62, (window.innerHeight || 800) * 0.3)) : Math.max(300, Math.min(W * 0.55, 460))), m = { t: 30, r: 14, b: 32, l: 44 };
     svg.attr("viewBox", [0, 0, W, H]).attr("role", "img").attr("aria-label", "Years from discovery to first production against discovery year");
     svg.selectAll("*").remove();
     const x = d3.scaleLinear([1966, 2026], [m.l, W - m.r]);

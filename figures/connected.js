@@ -13,7 +13,7 @@ export default function create(el, { journey: J }) {
     const prevUpto = cur.upto ?? (animate ? P[0].year : state.upto);
     W = width; cur = state;
     const narrow = W < 560, vh = window.innerHeight || 800;
-    const H = Math.round(Math.max(320, Math.min(W * 0.72, vh * (narrow ? 0.45 : 0.62))));
+    const H = Math.round(Math.max(narrow ? 240 : 320, Math.min(W * 0.72, vh * (narrow ? 0.36 : 0.62))));
     const m = { t: 22, r: narrow ? 14 : 30, b: 44, l: narrow ? 44 : 58 };
     svg.attr("viewBox", [0, 0, W, H]).attr("role", "img").attr("aria-label", "Connected scatterplot of technical success rate against volume per discovery, 1990 to 2025");
     svg.selectAll("*").remove();
@@ -52,10 +52,13 @@ export default function create(el, { journey: J }) {
       .attr("cx", (p) => x(p.x)).attr("cy", (p) => y(p.y)).attr("r", (p) => (inHl(p.year) ? 4.6 : 3.4))
       .attr("fill", (p) => (inHl(p.year) ? C.late : tok("surface"))).attr("stroke", (p) => (inHl(p.year) ? tok("surface") : hl ? C.path : C.early)).attr("stroke-width", 1.6);
     if (animate && !reducedMotion()) dots.filter((p) => p.year > prevUpto).attr("opacity", 0).transition().delay((p) => (p.year - prevUpto) * 90).duration(120).attr("opacity", 1);
-    const lab = svg.append("g");
-    vis.forEach((p) => {
+    const lab = svg.append("g"), placed = [];
+    [...vis].reverse().forEach((p) => {  // latest first, so the current year wins a collision
       const t = J.labels[String(p.year)] ?? (p.year === state.upto ? String(p.year) : null);
       if (!t || (narrow && t.length > 6 && p.year !== 2010)) return;
+      const lx = x(p.x) + 8, ly = y(p.y) - 6, wdt = (narrow ? 4 : t.length) * 6.5;
+      if (placed.some((q) => Math.abs(q[1] - ly) < 13 && lx < q[0] + q[2] && q[0] < lx + wdt)) return;
+      placed.push([lx, ly, wdt]);
       lab.append("text").attr("class", "wc-year").attr("x", x(p.x) + 8).attr("y", y(p.y) - 6).text(narrow ? String(p.year) : t);
     });
     svg.append("g").selectAll("circle").data(vis).join("circle").attr("cx", (p) => x(p.x)).attr("cy", (p) => y(p.y)).attr("r", 12).attr("fill", "transparent")
