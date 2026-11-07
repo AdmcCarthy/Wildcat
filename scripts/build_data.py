@@ -84,7 +84,7 @@ def main(raw: Path, out: Path) -> None:
     pdo = st[st.fldStatus == "Approved for production"].groupby("fldName")["from"].min()
     prod = pd.read_csv(raw / "field_production_monthly.csv")
     prod = prod[prod.prfPrdOeNetMillSm3 > 0]
-    first_month = prod.assign(dt=pd.to_datetime(dict(year=prod.prfYear, month=prod.prfMonth, day=1))).groupby("prfInformationCarrier").dt.min()
+    first_month = prod.assign(dt=pd.to_datetime({"year": prod.prfYear, "month": prod.prfMonth, "day": 1})).groupby("prfInformationCarrier").dt.min()
     field_start = producing.combine_first(first_month)
     field_status = dict(zip(fld.fldName, fld.fldCurrentActivitySatus))
 
@@ -165,7 +165,7 @@ def main(raw: Path, out: Path) -> None:
     last_year = int(wells.year.max())
     disc_w = wells[wells.new_discovery]
     for k in (5, 10):
-        share = disc_w.groupby("year").apply(lambda g: (g.lead_years <= k).sum() / len(g), include_groups=False)
+        share = disc_w.groupby("year").apply(lambda g, k=k: (g.lead_years <= k).sum() / len(g), include_groups=False)
         y[f"producing_within_{k}y"] = y.year.map(share).where(y.year <= last_year - k)
     y["from_platform"] = y.year.map(wells.groupby("year").from_platform.sum())
     y["technical_rate"] = y.technical / y.wildcats

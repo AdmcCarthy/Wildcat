@@ -7,7 +7,6 @@ Volumes in Sm³ o.e. for SubScout's `volume` filter; shares 0–1. Periods: 1990
 from __future__ import annotations
 
 import pandas as pd
-
 from subscout import metric
 
 M = 1e6
