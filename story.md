@@ -34,6 +34,10 @@ data:
   fields: data/fields.geojson
   land: data/land.geojson
   borders: data/borders.geojson
+  ns_quarters: data/ns_quarters.json
+  land_ns: data/land_ns.geojson
+  fields_ns: data/fields_ns.geojson
+  licences_ns: data/licences_ns.geojson
 ---
 
 A wildcat is the first well drilled on a new idea: a structure nobody has tested. Sodir, the
@@ -234,6 +238,90 @@ confidence: derived
 unit: years
 notes: First production is the producing field's start, or the date the discovery was included in it if later. Discoveries that have not produced yet are not shown, so recent years show only the fast ones.
 exception: { rule: sqrt-scale, reason: "Square-root axis spreads the many short lead times while keeping the 30-year ones in view." }
+```
+:::
+
+## Where the North Sea still pays
+
+The national averages hide a map. Cut every North Sea block into four equal quarters, ten minutes of
+longitude by seven and a half of latitude, and each of the {{ ns_quarters }} quarters has its own record: how many wildcats, how often they
+struck, how much they found. Across {{ ns_wells }} North Sea wildcats, one glyph per quarter and era: a ring for every wildcat drilled, and at
+the centre a disc whose area is the volume discovered. Colour says how the quarter did: clay below
+the North Sea's long-run hit rate of {{ ns_avg | pct }}, grey around it, blue above; pale for small
+finds, deep for large ones.
+
+::: step {beat=twist kicker="1966–1985" layout=wide}
+### The frontier
+
+The first twenty years were a lottery with huge prizes. Only {{ ns_rate_0 | pct }} of wildcats struck,
+so clay rings dominate, but {{ ns_large_0 }} quarters held finds of more than {{ 50 | param }} million
+Sm³ o.e. each: Troll, Statfjord, Ekofisk, Oseberg. Together that era found {{ ns_vol_0 | volume }}.
+
+```chart
+id: glyphs
+type: custom
+module: figures/glyphs.js
+data: [quarters, land_ns, fields_ns, licences_ns]
+register: outcrop
+state: { era: 0 }
+title: Big finds belong to the North Sea's first decades; the last ten years drilled more accurately and found little
+subtitle: Wildcats by quarter-block and era; rings = wells, disc = volume found, colour = success and size
+source: sodir
+confidence: derived
+unit: wells; million Sm³ o.e.
+notes: Success is shrunk towards the North Sea average (three-well prior) so one well does not make an outlier. Volume is attributed to the well that made each discovery (field volumes to the founding discovery); discoveries rated production unlikely have no published volume and count as zero.
+exception: { rule: direct-labels, reason: "Hundreds of glyphs: a bivariate legend, ring key and hover replace labels. Colour is bivariate (3 x 3, corners labelled); rings and disc area carry count and volume as well." }
+```
+:::
+
+::: step {beat=twist kicker="1986–2005"}
+### Filling in
+
+The hit rate climbed and the glyphs gathered around the fields already found: Tampen, Oseberg,
+Sleipner. Most discs turn pale. Only {{ ns_large_1 }} quarters held a large find, and the era found
+{{ ns_vol_1 | volume }}.
+
+```chart
+use: glyphs
+era: 1
+```
+:::
+
+::: step {beat=twist kicker="2006–2015"}
+### One giant in a mature basin
+
+More of the same, with one exception that stands out on the whole map: the large blue disc on the Utsira
+High is Johan Sverdrup.
+
+```chart
+use: glyphs
+era: 2
+```
+:::
+
+::: step {beat=twist kicker="2016–2025"}
+### Busy, accurate, small
+
+The hit rate has risen to {{ ns_rate_3 | pct }} and blue rings are now common: {{ ns_above_3 }} of the {{ ns_cells_3 }} quarters drilled beat the
+average, and {{ ns_multi_3 }} were drilled three times or more. But every disc is pale. The best
+quarter of the decade found {{ ns_top_last | volume }}; the whole North Sea found {{ ns_vol_3 | volume }}.
+
+```chart
+use: glyphs
+era: 3
+```
+:::
+
+::: step {beat=twist kicker="Licences today"}
+### Inside today's licences
+
+With the {{ ns_licences }} present-day licences drawn in, the pattern is plain: the last decade's
+wildcats sit almost entirely inside acreage that is already licensed around producing fields.
+
+```chart
+use: glyphs
+era: 3
+lic: true
 ```
 :::
 

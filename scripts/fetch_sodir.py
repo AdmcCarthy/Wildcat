@@ -35,6 +35,10 @@ LAYERS = {  # name: (url, where, fields, maxAllowableOffset)
     "fields.geojson": (f"{DATA}/7100", "1=1", "fldName,fldNpdidField,fldHcType,fldMainArea", 0.002),
     "discoveries.geojson": (f"{DATA}/7000", "1=1", "*", 0.002),
     "land.geojson": (f"{BASE}/5", "1=1", "*", 0.01),
+    # North Sea blocks in Sodir's native ED50 (EPSG:4230), where they are exact lat/lon rectangles and
+    # match the datum of the wellbore coordinates; used to cut each block into four equal quarters
+    "licences_active.geojson": (f"{DATA}/3000", "prlActive='Y'", "prlName,cmpLongName,prlMainArea", 0.002),
+    "blocks_ns_ed50.geojson": (f"{DATA}/1001", "blcMainArea='North sea'", "blcName,qadName", None, 4230),
     "sea_boundaries.geojson": (f"{BASE}/3", "1=1", "*", 0.005),
 }
 
@@ -52,10 +56,10 @@ def get(url: str, **kw) -> requests.Response:
     raise RuntimeError("unreachable")
 
 
-def layer(url: str, where: str, fields: str, offset: float | None) -> dict:
+def layer(url: str, where: str, fields: str, offset: float | None, sr: int = 4326) -> dict:
     feats, start = [], 0
     while True:
-        p = {"where": where, "outFields": fields, "returnGeometry": "true", "outSR": 4326,
+        p = {"where": where, "outFields": fields, "returnGeometry": "true", "outSR": sr,
              "f": "geojson", "resultOffset": start, "resultRecordCount": 1000}
         if offset:
             p["maxAllowableOffset"] = offset
@@ -76,8 +80,8 @@ def main(out: Path) -> None:
         text = get(FACTPAGES.format(t=t)).content.decode("utf-8-sig")
         (out / f"{t}.csv").write_text(text, encoding="utf-8")
         print(f"{t}: {text.count(chr(10)) - 1} rows")
-    for name, (url, where, fields, off) in LAYERS.items():
-        fc = layer(url, where, fields, off)
+    for name, (url, where, fields, off, *rest) in LAYERS.items():
+        fc = layer(url, where, fields, off, *rest)
         (out / name).write_text(json.dumps(fc), encoding="utf-8")
         print(f"{name}: {len(fc['features'])} features")
 

@@ -49,7 +49,8 @@ def datasets(d):
         "cohort": [{"year": int(r.year), "p5": None if pd.isna(r.producing_within_5y) else round(r.producing_within_5y, 3),
                     "p10": None if pd.isna(r.producing_within_10y) else round(r.producing_within_10y, 3)} for r in y.itertuples() if 1966 <= r.year <= 2025],
     }
-    return {"journey": journey, "outcomes": oc[["period", "outcome", "share"]], "days": days, "lead": lead}
+    return {"journey": journey, "outcomes": oc[["period", "outcome", "share"]], "days": days, "lead": lead,
+            "quarters": d["ns_quarters"]}
 
 
 def metrics(d):
@@ -98,5 +99,32 @@ def metrics(d):
         "eval_2020s": m(float((d20.commercial_status == "evaluating").mean()), "2020–2025 discoveries still being evaluated", fp, "derived"),
         "p10_2000s": m(cohort("producing_within_10y", 2000, 2009), "Share of 2000s discoveries producing within ten years", fp, "derived"),
         "p10_2010s": m(cohort("producing_within_10y", 2010, 2019), "Share of 2010–2015 discoveries producing within ten years (later years too recent)", fp, "derived"),
+        **ns_metrics(d["ns_quarters"]),
         "peak_wildcats": m(int(co.loc[1990:2025, "wildcats"].max()), "Most wildcats completed in one year since 1990", fp, "observed"),
+    }
+
+
+def ns_metrics(q):
+    """North Sea quarter-block section: per-era figures from scripts/build_blocks.py."""
+    S, cells = q["summary"], q["cells"]
+    m, fp = metric, "sodir"
+    era = lambda e: [c for c in cells if c["era"] == e]
+    large = lambda e: sum(1 for c in era(e) if c["y"] == 2)
+    top_last = max(era(3), key=lambda c: c["vol"])
+    return {
+        "ns_wells": m(S["n_wells"], "North Sea wildcats completed 1966–2025", fp, "observed"),
+        "ns_avg": m(S["avg"], "North Sea technical success rate 1966–2025, the centre of the diverging scale", fp, "derived"),
+        "ns_quarters": m(len(q["grid"]), "Quarter-blocks in the North Sea (Sodir blocks cut into four)", fp, "derived"),
+        "ns_rate_0": m(S["era_rate"][0], "North Sea technical success 1966–1985", fp, "derived"),
+        "ns_rate_3": m(S["era_rate"][3], "North Sea technical success 2016–2025", fp, "derived"),
+        "ns_vol_0": m(S["era_volume"][0] * 1e6, "Volume attributed to North Sea discoveries 1966–1985", fp, "derived", "Sm³ o.e."),
+        "ns_vol_1": m(S["era_volume"][1] * 1e6, "Volume attributed to North Sea discoveries 1986–2005", fp, "derived", "Sm³ o.e."),
+        "ns_vol_3": m(S["era_volume"][3] * 1e6, "Volume attributed to North Sea discoveries 2016–2025", fp, "derived", "Sm³ o.e."),
+        "ns_large_0": m(large(0), "Quarter-blocks with large finds (50 million Sm³ o.e. or more per discovery), 1966–1985", fp, "derived"),
+        "ns_large_1": m(large(1), "Quarter-blocks with large finds, 1986–2005", fp, "derived"),
+        "ns_cells_3": m(len(era(3)), "Quarter-blocks with a wildcat 2016–2025", fp, "observed"),
+        "ns_above_3": m(S["era_above"][3], "Quarter-blocks above the average (adjusted), 2016–2025", fp, "derived"),
+        "ns_multi_3": m(sum(1 for c in era(3) if c["wells"] >= 3), "Quarter-blocks with three or more wildcats, 2016–2025", fp, "observed"),
+        "ns_top_last": m(top_last["vol"] * 1e6, f"Largest volume found in one quarter-block 2016–2025 ({top_last['q']})", fp, "derived", "Sm³ o.e."),
+        "ns_licences": m(S["n_licences"], "Present-day production licences touching the North Sea frame", fp, "observed"),
     }

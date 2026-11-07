@@ -12,3 +12,7 @@ Owner: Adam McCarthy, petroleum geoscience domain expert. Follow SubScout's CLAU
   approved, following 'included in' chains. Lead time = completion to producing-field start.
 - Palette: Tulip's eucalyptus and clay (figures/common.js); built-in charts use fjord/neutral tokens.
 - Numbers in prose come from story.py and are tested in tests/test_wildcat.py. Build must have 0 warnings.
+- North Sea section (figures/glyphs.js, scripts/build_blocks.py): quarter-blocks x four eras; glyph = rings
+  (wells) + disc (volume, area) with a 3x3 diverging bivariate fill (x: success vs North Sea average,
+  clay-grey-blue; y: volume per discovery, pale-deep). Base map and licences on canvas, one SVG layer per
+  era prepared only near view in idle time (perf gate). Phones: compact legend, map <= vh - 530.

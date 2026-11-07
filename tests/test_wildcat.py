@@ -69,3 +69,21 @@ def test_year_claims_in_prose(y):
 def test_platform_wells_produce_fast(w):
     p = w[w.from_platform & w.commercial]
     assert len(p) >= 3 and p.lead_years.median() < 1
+
+
+def test_north_sea_quarters():
+    q = json.loads((D / "ns_quarters.json").read_text())
+    s = q["summary"]
+    assert len(q["grid"]) == 4 * 284 and s["unassigned"] == 0  # every block cut in four; every well placed
+    assert sum(c["wells"] for c in q["cells"]) == s["n_wells"] == sum(s["era_wells"])
+    assert sum(c["hits"] for c in q["cells"]) / s["n_wells"] == pytest.approx(s["avg"], abs=1e-3)
+    # the claims in the prose: big finds vanish, volume falls by era, Sverdrup is the 2006-2015 outlier
+    large = [sum(1 for c in q["cells"] if c["era"] == e and c["y"] == 2) for e in range(4)]
+    assert large[0] > large[1] > large[2] >= 1 and large[3] == 0
+    assert s["era_volume"] == sorted(s["era_volume"], reverse=True)
+    top2 = max((c for c in q["cells"] if c["era"] == 2), key=lambda c: c["vol"])
+    assert any("Johan Sverdrup" in n for n in top2["names"])
+    # shrinkage keeps adjusted rates between the raw rate and the average
+    for c in q["cells"]:
+        lo, hi = sorted([c["raw"], s["avg"]])
+        assert lo - 1e-3 <= c["rate"] <= hi + 1e-3
