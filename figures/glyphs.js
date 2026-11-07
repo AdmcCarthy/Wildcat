@@ -16,7 +16,7 @@ const ringCol = (x) => BIV[scheme()][1][x];
 export default function create(el, { quarters: Q, land_ns: LAND, fields_ns: FL, licences_ns: LIC }, opts = {}) {
   const S = Q.summary;
   el.innerHTML = "";
-  const wrap = d3.select(el).append("div").attr("class", "wcg-wrap");
+  const wrap = d3.select(el).append("div").attr("class", "wcg-wrap").classed("is-export", !!opts.export);
   const mapBox = wrap.append("div").attr("class", "wcg-map");
   const side = wrap.append("div").attr("class", "wcg-side");
   const head = side.append("div").attr("class", "wcg-head");
@@ -55,11 +55,11 @@ export default function create(el, { quarters: Q, land_ns: LAND, fields_ns: FL, 
     const fig = el.closest(".ss-figure"), above = fig ? el.getBoundingClientRect().top - fig.getBoundingClientRect().top : 0;
     const room = narrow || !fig ? Infinity : vh - 56 - above - 30;
     // phones: leave room below the pinned panel for the step text (about 330 px on a 740 px screen)
-    let H = Math.round(narrow ? Math.max(190, Math.min(vh * 0.34, vh - 530)) : Math.max(420, Math.min(room, 920)));
+    let H = opts.export ? Math.round(opts.height()) : Math.round(narrow ? Math.max(190, Math.min(vh * 0.34, vh - 530)) : Math.max(420, Math.min(room, 920)));
     // the drilled North Sea: Ekofisk (56.3N) to Tampen (61.6N), west of the empty Skagerrak
     const frame = { type: "MultiPoint", coordinates: [[1.7, 56.25], [7.0, 56.25], [7.0, 61.9], [1.7, 61.9]] };
     const proj = d3.geoConicConformal().parallels([56, 62]).rotate([-5, 0]);
-    const maxW = narrow ? width : Math.max(260, width - 300);
+    const maxW = narrow ? width : Math.max(260, width - (opts.export ? 420 : 300));
     proj.fitHeight(H - 12, frame);
     let [[bx0], [bx1]] = d3.geoPath(proj).bounds(frame);
     if (bx1 - bx0 > maxW - 12) { proj.fitWidth(maxW - 12, frame); const b = d3.geoPath(proj).bounds(frame); H = Math.round(b[1][1] - b[0][1] + 12); [[bx0], [bx1]] = b; }
@@ -190,6 +190,13 @@ const CSS = `
 .wcg-discs{flex-wrap:wrap} .wcg-d{display:inline-flex;flex-direction:column;align-items:center;gap:1px} .wcg-d small{font-size:9.5px;color:var(--ss-text-muted)}
 .wcg-how{margin:0;font-size:11.5px;line-height:1.45;color:var(--ss-text-muted);max-width:30ch}
 .wcg-compact{display:none}
+.wcg-wrap.is-export{justify-content:center;gap:56px}
+.wcg-wrap.is-export .wcg-side{flex:0 1 380px;gap:22px}
+.wcg-wrap.is-export .wcg-head{font-size:17px} .wcg-wrap.is-export .wcg-head b{font-size:40px}
+.wcg-wrap.is-export .wcg-legend{font-size:14px;gap:22px} .wcg-wrap.is-export .wcg-key{font-size:14px}
+.wcg-wrap.is-export .wcg-bivt{grid-template-columns:auto repeat(3,56px);gap:4px} .wcg-wrap.is-export .wcg-bivt i{width:56px;height:34px}
+.wcg-wrap.is-export .wcg-rl{font-size:13px} .wcg-wrap.is-export .wcg-cl{font-size:12px} .wcg-wrap.is-export .wcg-ylab,.wcg-wrap.is-export .wcg-xlab{font-size:14px}
+.wcg-wrap.is-export .wcg-how{font-size:14px;max-width:34ch}
 .wcg-wrap.is-narrow .wcg-how,.wcg-wrap.is-narrow .wcg-discs,.wcg-wrap.is-narrow .wcg-bivt{display:none}
 .wcg-wrap.is-narrow .wcg-compact{display:flex;gap:8px;align-items:center;font-size:10.5px;line-height:1.3}
 .wcg-mini{display:grid;grid-template-columns:repeat(3,12px);gap:1px} .wcg-mini i{width:12px;height:12px;border-radius:2px;display:block}

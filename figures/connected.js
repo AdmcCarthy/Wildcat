@@ -3,7 +3,7 @@
 // state: { upto: year, highlight: [from, to] | null, emphasis: "x" | "y" | null }
 import { pal, tok, tip, vol, pct, unit, reducedMotion } from "./common.js";
 
-export default function create(el, { journey: J }) {
+export default function create(el, { journey: J }, opts = {}) {
   el.innerHTML = "";
   const svg = d3.select(el).append("svg").style("display", "block").style("width", "100%");
   const P = J.points;
@@ -13,7 +13,7 @@ export default function create(el, { journey: J }) {
     const prevUpto = cur.upto ?? (animate ? P[0].year : state.upto);
     W = width; cur = state;
     const narrow = W < 560, vh = window.innerHeight || 800;
-    const H = Math.round(Math.max(narrow ? 240 : 320, Math.min(W * 0.72, vh * (narrow ? 0.36 : 0.62))));
+    const H = opts.export ? Math.round(opts.height()) : Math.round(Math.max(narrow ? 240 : 320, Math.min(W * 0.72, vh * (narrow ? 0.36 : 0.62))));
     const m = { t: 22, r: narrow ? 14 : 30, b: 44, l: narrow ? 44 : 58 };
     svg.attr("viewBox", [0, 0, W, H]).attr("role", "img").attr("aria-label", "Connected scatterplot of technical success rate against volume per discovery, 1990 to 2025");
     svg.selectAll("*").remove();

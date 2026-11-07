@@ -55,6 +55,7 @@ wildcats struck, and each new discovery held {{ vol_disc_1990s | volume }} on av
 
 ```chart
 id: journey
+export: true
 type: custom
 module: figures/connected.js
 data: journey
@@ -259,6 +260,7 @@ Sm³ o.e. each: Troll, Statfjord, Ekofisk, Oseberg. Together that era found {{ n
 
 ```chart
 id: glyphs
+export: true
 type: custom
 module: figures/glyphs.js
 data: [quarters, land_ns, fields_ns, licences_ns]

@@ -11,7 +11,7 @@ scatterplot of success rate against volume per discovery, 1990–2025. The story
 `reveal` arc: the hit rate has held at about half, near-field drilling in mature acreage explains it,
 and the twist is that each find holds a fraction of what it used to.
 
-A [SubScout](https://github.com/AdmcCarthy/SubScout) story (v0.4.0): `story.md`, `story.py` (every
+A [SubScout](https://github.com/AdmcCarthy/SubScout) story (v0.5.0): `story.md`, `story.py` (every
 quoted number with method, source and confidence) and `figures/` (connected scatterplot, map,
 time-to-production chart, North Sea quarter-block glyph map with a bivariate colour scale).
 
@@ -21,6 +21,7 @@ uv run python scripts/fetch_sodir.py   # -> data/raw (Sodir FactPages, FactMaps;
 uv run python scripts/build_data.py    # -> data/
 uv run python scripts/build_blocks.py  # -> data/ns_quarters.json (North Sea glyph map)
 uv run subscout build . --out _site    # -> the page
+uv run subscout export _site           # -> high-resolution PNGs for export/ pages (needs Playwright)
 uv run pytest                          # checks against Sodir's series + every quoted number
 ```
 
