@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked --all-groups
+      - name: Check the data (mass balance, cross-border shares, hubs and areas)
+        run: uv run pytest -q
+      - name: Build the story with SubScout (fails on errors; warnings fail below)
+        run: uv run subscout build . --out _site
+      - name: No build warnings (untraced numbers, unused metrics, arc beats)
+        run: python3 -c 'import json,sys;w=json.load(open("_site/build-report.json"))["warnings"];print("\n".join(w));sys.exit(1 if w else 0)' 
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
