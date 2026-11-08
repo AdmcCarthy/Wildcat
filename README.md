@@ -1,14 +1,14 @@
 # Wildcat
 
-**Still striking, in smaller pieces: fifty years of Norwegian wildcat wells.**
+**Still striking, in smaller pieces: fifty years of Norwegian exploration wellbores.**
 Live page: https://admccarthy.github.io/Wildcat/
 
 "Wildcat" is the repository's name; the page is titled *Still striking, in smaller pieces*. Every
-exploration wildcat on the Norwegian continental shelf since 1966, from Sodir's public data: how often
-wildcats find oil or gas (technical success), how much each discovery holds, how many discoveries are
+exploration wellbore on the Norwegian continental shelf since 1966, from Sodir's public data: how often
+exploration wellbores find oil or gas (technical success), how much each discovery holds, how many discoveries are
 developed (commercial success) and how long they take to produce. The key figure is a connected
 scatterplot of success rate against volume per discovery, 1990–2025. The story follows SubScout's
-`reveal` arc: the hit rate has held at about half, near-field drilling in mature acreage explains it,
+`reveal` arc: the success rate has held at about half, near-field drilling in mature acreage explains it,
 and the twist is that each find holds a fraction of what it used to.
 
 A [SubScout](https://github.com/AdmcCarthy/SubScout) story (v0.5.0): `story.md`, `story.py` (every

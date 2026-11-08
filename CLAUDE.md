@@ -1,10 +1,14 @@
 # Wildcat: working rules
 
-A SubScout story (github.com/AdmcCarthy/SubScout, pinned tag) on Norwegian exploration wildcats.
+A SubScout story (github.com/AdmcCarthy/SubScout, pinned tag) on Norwegian exploration wellbores.
 "Wildcat" is only the repo name; the page is titled *Still striking, in smaller pieces*.
 Owner: Adam McCarthy, petroleum geoscience domain expert. Follow SubScout's CLAUDE.md and styleguide.
 
-- Arc `reveal`: claim (hit rate ~half) -> evidence (near-field, APA, faster wells) -> twist (smaller
+@../../shared/idiom/CORE.md
+
+Voice and structure of written work (README, docs, published pages) follow Idiom's CORE.md and house style: British English, impersonal, one creative headline then plain varied headings, a section ends on its last point. The import is harmless when the file is absent (CI).
+
+- Arc `reveal`: claim (success rate ~half) -> evidence (near-field, APA, faster wells) -> twist (smaller
   finds, lower commercial success, longer to production except platform-drilled wells).
 - Key figure: connected scatterplot (figures/connected.js), technical success vs volume per discovery,
   three-year centred ratios of sums, 1990–2025; last decade = 2016–2025; 2026 partial, never averaged.

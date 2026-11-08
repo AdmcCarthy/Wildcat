@@ -61,7 +61,7 @@ def test_quoted_rates(built, y, w):
 
 
 def test_year_claims_in_prose(y):
-    # 2010 stands out (Johan Sverdrup) in volume per discovery since 2000; the hit rate holds near half
+    # 2010 stands out (Johan Sverdrup) in volume per discovery since 2000; the success rate holds near half
     assert y.loc[2000:2025, "volume_per_discovery"].idxmax() == 2010
     assert abs(y.loc[2006:2025].technical.sum() / y.loc[2006:2025].wildcats.sum() - 0.5) < 0.06
 

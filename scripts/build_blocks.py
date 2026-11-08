@@ -131,7 +131,7 @@ def main(raw: Path, out: Path) -> None:
         {"type": "Feature", "properties": {"n": len(geoms)}, "geometry": json.loads(json.dumps(merged.__geo_interface__))}]}))
     summary["n_licences"] = len(geoms)
     (out / "ns_quarters.json").write_text(json.dumps({"cells": feats, "grid": grid, "summary": summary}, ensure_ascii=False))
-    print(f"North Sea: {len(w)} wildcats in {len(quarters)} quarters ({unassigned} unassigned); average {avg:.3f}; "
+    print(f"North Sea: {len(w)} exploration wellbores in {len(quarters)} quarters ({unassigned} unassigned); average {avg:.3f}; "
           f"cells per era {summary['era_quarters']}")
 
 

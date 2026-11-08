@@ -159,8 +159,8 @@ export default function create(el, { quarters: Q, land_ns: LAND, fields_ns: FL, 
     if (rebuild) { idleId = null; geo = build(width); geo.sch = scheme(); base(); legend(); }
     cur = state;
     const e = state.era, dur = animate && !reducedMotion() ? 500 : 0;
-    head.html(geo.narrow ? `<b>${S.eras[e]}</b> <span>${S.era_wells[e]} wildcats · ${pct(S.era_rate[e])} struck</span>`
-      : `<b>${S.eras[e]}</b> <span>${S.era_wells[e]} wildcats · ${pct(S.era_rate[e])} found oil or gas · ${vol(S.era_volume[e], 0)} discovered</span>`);
+    head.html(geo.narrow ? `<b>${S.eras[e]}</b> <span>${S.era_wells[e]} exploration wellbores · ${pct(S.era_rate[e])} struck</span>`
+      : `<b>${S.eras[e]}</b> <span>${S.era_wells[e]} exploration wellbores · ${pct(S.era_rate[e])} found oil or gas · ${vol(S.era_volume[e], 0)} discovered</span>`);
     licCv.style.transitionDuration = `${dur}ms`;
     licCv.style.opacity = state.lic ? 0.9 : 0.25;
     const show = eraGroup(e);

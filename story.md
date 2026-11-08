@@ -1,7 +1,7 @@
 ---
 title: Still striking, in smaller pieces
 short_title: "Still striking, in smaller pieces"
-dek: "Norway's wildcat wells still find oil or gas about half the time. They do it by drilling close to what is already there: each find is a fraction of what it used to be, the wells are quicker, and a few drilled from a platform reached production almost at once."
+dek: "Norway's exploration wellbores still find oil or gas about half the time. They do it by drilling close to what is already there: each find is a fraction of what it used to be, the wells are quicker, and a few drilled from a platform reached production almost at once."
 kicker: NCS · Exploration wells 1966–2026 · Sodir
 byline: Adam McCarthy
 date: 2026-11-07
@@ -12,7 +12,7 @@ surface: nordic-cool
 units: sm3
 horizon: true
 kpis:
-  - { metric: tech_last, filter: pct, label: "of wildcats found oil or gas, 2016–2025" }
+  - { metric: tech_last, filter: pct, label: "of exploration wellbores found oil or gas, 2016–2025" }
   - { metric: vol_disc_last, filter: volume, label: "found per new discovery since 2016" }
   - { metric: near_last, filter: pct, label: "drilled within 25 km of a field" }
   - { metric: dev_2010s, filter: pct, label: "of 2010s discoveries developed so far" }
@@ -23,7 +23,7 @@ sources:
     accessed: 2026-11-07
     note: Exploration wellbores, discoveries, fields, field status and production; field outlines, land and maritime boundaries. NLOD 2.0.
   np:
-    name: Sodir, gross resource growth and wildcats completed, 1990–2025 (norskpetroleum.no)
+    name: Sodir, gross resource growth and exploration wellbores completed, 1990–2025 (norskpetroleum.no)
     url: https://www.norskpetroleum.no/en/exploration/exploration-activity/
     accessed: 2026-11-07
     note: Volume discovered each year, million Sm³ o.e.; 2025 is preliminary
@@ -40,18 +40,18 @@ data:
   licences_ns: data/licences_ns.geojson
 ---
 
-A wildcat is the first well drilled on a new idea: a structure nobody has tested. Sodir, the
+An exploration wellbore, also called a wildcat wellbore, is the first well drilled on a new idea: a structure nobody has tested. Sodir, the
 Norwegian Offshore Directorate, records every one: where it was drilled, how long it took, and what it
-found. {{ n_wildcats }} wildcats have been completed on the Norwegian shelf since 1966. Put the years
-side by side and two measures tell most of the story: how often a wildcat finds oil or gas, and how
+found. {{ n_wildcats }} exploration wellbores have been completed on the Norwegian shelf since 1966. Put the years
+side by side and two measures tell most of the story: how often an exploration wellbore finds oil or gas, and how
 much each new discovery holds.
 
 ::: step {beat=claim kicker="1990–1999" layout=wide}
-### In the 1990s four in ten wildcats struck, and each find was large
+### In the 1990s four in ten exploration wellbores struck, and each find was large
 
-Each point is a year, averaged with its neighbours. Across: the share of wildcats that found oil or
+Each point is a year, averaged with its neighbours. Across: the share of exploration wellbores that found oil or
 gas. Up: the volume found per new discovery, on a log scale. In the 1990s {{ tech_1990s | pct }} of
-wildcats struck, and each new discovery held {{ vol_disc_1990s | volume }} on average.
+exploration wellbores struck, and each new discovery held {{ vol_disc_1990s | volume }} on average.
 
 ```chart
 id: journey
@@ -61,23 +61,23 @@ module: figures/connected.js
 data: journey
 register: outcrop
 state: { upto: 1999 }
-title: Wildcats find oil or gas about as often as ever; each find holds far less
+title: Exploration wellbores find oil or gas about as often as ever; each find holds far less
 subtitle: Technical success rate against volume per new discovery, three-year averages, 1990–2025
 source: np
 confidence: derived
-unit: share of wildcats; million Sm³ o.e. per discovery
+unit: share of exploration wellbores; million Sm³ o.e. per discovery
 notes: Success from Sodir's wellbore results (oil or gas proven; shows count as dry). Volumes are Sodir's gross resource growth for each year divided by new discoveries that year.
 exception: { rule: log-scale, reason: "Volume per discovery spans more than an order of magnitude; a log axis keeps the last decade readable. Gridlines are labelled with real values." }
 ```
 :::
 
 ::: step {beat=claim kicker="2000–2015"}
-### The hit rate rose in the 2000s, and Johan Sverdrup arrived in 2010
+### The success rate rose in the 2000s, and Johan Sverdrup arrived in 2010
 
-The 2000s pushed the hit rate up to {{ tech_2000s | pct }}, while each discovery shrank to
+The 2000s pushed the success rate up to {{ tech_2000s | pct }}, while each discovery shrank to
 {{ vol_disc_2000s | volume }}. Then 2010 stands out: Johan Sverdrup
 lifted the volume per discovery that year to {{ vol_2010_disc | volume }}. A drilling boom followed,
-with up to {{ peak_wildcats }} wildcats completed in a year.
+with up to {{ peak_wildcats }} exploration wellbores completed in a year.
 
 ```chart
 use: journey
@@ -86,9 +86,9 @@ upto: 2015
 :::
 
 ::: step {beat=claim kicker="2016–2025"}
-### The hit rate has held at about half for twenty years
+### The success rate has held at about half for twenty years
 
-In the last decade {{ n_last }} wildcats were completed and {{ tech_last | pct }} of them found oil or
+In the last decade {{ n_last }} exploration wellbores were completed and {{ tech_last | pct }} of them found oil or
 gas: {{ disc_last }} new discoveries. Sodir calls that high by international standards, and it has
 held for twenty years.
 
@@ -99,12 +99,12 @@ highlight: [2016, 2025]
 ```
 :::
 
-## How the hit rate holds up
+## How the success rate holds up
 
 ::: step {beat=evidence kicker="Where they drill"}
-### Almost all recent wildcats sit among producing fields
+### Almost all recent exploration wellbores sit among producing fields
 
-The wildcats of the last decade, in green where they found oil or gas. Almost all sit among the fields
+The exploration wellbores of the last decade, in green where they found oil or gas. Almost all sit among the fields
 that already produce.
 
 ```chart
@@ -113,8 +113,8 @@ type: custom
 module: figures/map.js
 data: [wells, fields, land, borders]
 state: { colour: result }
-title: Most of the last decade's wildcats were drilled next to existing fields
-subtitle: Wildcats completed 2016–2025, with field outlines
+title: Most of the last decade's exploration wellbores were drilled next to existing fields
+subtitle: Exploration wellbores completed 2016–2025, with field outlines
 source: sodir
 confidence: observed
 notes: Distance is to the nearest field whose development plan was approved before the well was spudded.
@@ -123,9 +123,9 @@ exception: { rule: north-up, reason: "Map rotated so the shelf runs up the panel
 :::
 
 ::: step {beat=evidence kicker="Near-field"}
-### Most recent wildcats were within reach of an approved field
+### Most recent exploration wellbores were within reach of an approved field
 
-{{ near_last | pct }} of those wildcats were drilled within {{ 25 | param }} km of a field already
+{{ near_last | pct }} of those exploration wellbores were drilled within {{ 25 | param }} km of a field already
 approved for development, up from {{ near_1990s | pct }} in the 1990s. A find there can be tied back
 to a platform that is already paid for.
 
@@ -148,9 +148,9 @@ colour: apa
 :::
 
 ::: step {beat=evidence kicker="Speed"}
-### Wildcats now take less time to drill
+### Exploration wellbores now take less time to drill
 
-Wells are faster too. The median wildcat since 2016 took {{ days_last | round:0 }} days to drill,
+Wells are faster too. The median exploration wellbore since 2016 took {{ days_last | round:0 }} days to drill,
 against {{ days_2006_15 | round:0 }} in the ten years before.
 
 ```chart
@@ -160,22 +160,22 @@ data: days
 x: year
 y: median_days
 series: series
-title: The median wildcat now takes about a month to drill
-subtitle: Median drilling days per wildcat, by completion year
+title: The median exploration wellbore now takes about a month to drill
+subtitle: Median drilling days per exploration wellbore, by completion year
 source: sodir
 confidence: observed
 unit: days
 ```
 :::
 
-## What lies under the steady hit rate
+## What lies under the steady success rate
 
 ::: step {beat=twist kicker="Size"}
 ### The average discovery holds much less than in the 1990s
 
 The same path, with the last decade picked out. It has moved right and down: as many hits, much less
 oil and gas in each. Since 2016 a new discovery has held {{ vol_disc_last | volume }} on average,
-{{ vol_disc_fall | pct }} less than in the 1990s. Per wildcat drilled, that is
+{{ vol_disc_fall | pct }} less than in the 1990s. Per exploration wellbore drilled, that is
 {{ vol_wc_last | volume }} against {{ vol_wc_1990s | volume }}.
 
 ```chart
@@ -188,7 +188,7 @@ title: Since 2016 each new discovery has held {{ vol_disc_fall | pct }} less tha
 subtitle: Technical success rate against volume per new discovery, three-year averages
 source: np
 confidence: derived
-unit: share of wildcats; million Sm³ o.e. per discovery
+unit: share of exploration wellbores; million Sm³ o.e. per discovery
 notes: As above. Recent volumes are early estimates and tend to change as discoveries are appraised.
 exception: { rule: log-scale, reason: "As in the first view of this figure." }
 ```
@@ -211,10 +211,10 @@ y: share
 series: outcome
 colours: [data-seq-fjord-6, data-seq-fjord-4, data-seq-fjord-2, border, data-context]
 title: Commercial success has fallen even as technical success held
-subtitle: What became of every wildcat, by five-year period of completion, per cent
+subtitle: What became of every exploration wellbore, by five-year period of completion, per cent
 source: sodir
 confidence: derived
-unit: per cent of wildcats
+unit: per cent of exploration wellbores
 notes: Commercial = the discovery is producing, has produced or is approved for production, directly or through the field it joined. Recent periods are incomplete by nature.
 ```
 :::
@@ -224,7 +224,7 @@ notes: Commercial = the discovery is producing, has produced or is approved for 
 
 Developed discoveries also take longer to come on stream. {{ p10_2010s | pct }} of discoveries made
 from 2010 onwards were producing within ten years, against {{ p10_2000s | pct }} of those from the
-2000s. The exception is new: {{ platform_2020s }} wildcats since 2020 were drilled from an existing
+2000s. The exception is new: {{ platform_2020s }} exploration wellbores since 2020 were drilled from an existing
 platform, and several produced almost at once.
 
 ```chart
@@ -232,7 +232,7 @@ id: lead
 type: custom
 module: figures/lead.js
 data: lead
-title: Most discoveries take years to produce; wildcats drilled from platforms produce at once
+title: Most discoveries take years to produce; exploration wellbores drilled from platforms produce at once
 subtitle: Years from discovery to first production, for every discovery developed so far, by discovery year
 source: sodir
 confidence: derived
@@ -245,16 +245,16 @@ exception: { rule: sqrt-scale, reason: "Square-root axis spreads the many short 
 ## Where the North Sea still pays
 
 The national averages hide a map. Cut every North Sea block into four equal quarters, ten minutes of
-longitude by seven and a half of latitude, and each of the {{ ns_quarters }} quarters has its own record: how many wildcats, how often they
-struck, how much they found. Across {{ ns_wells }} North Sea wildcats, one glyph per quarter and era: a ring for every wildcat drilled, and at
+longitude by seven and a half of latitude, and each of the {{ ns_quarters }} quarters has its own record: how many exploration wellbores, how often they
+struck, how much they found. Across {{ ns_wells }} North Sea exploration wellbores, one glyph per quarter and era: a ring for every exploration wellbore drilled, and at
 the centre a disc whose area is the volume discovered. Colour says how the quarter did: clay below
-the North Sea's long-run hit rate of {{ ns_avg | pct }}, grey around it, blue above; pale for small
+the North Sea's long-run success rate of {{ ns_avg | pct }}, grey around it, blue above; pale for small
 finds, deep for large ones.
 
 ::: step {beat=twist kicker="1966–1985" layout=wide}
-### In the first twenty years few wildcats struck, and the prizes were large
+### In the first twenty years few exploration wellbores struck, and the prizes were large
 
-The first twenty years were a lottery with huge prizes. Only {{ ns_rate_0 | pct }} of wildcats struck,
+The first twenty years were a lottery with huge prizes. Only {{ ns_rate_0 | pct }} of exploration wellbores struck,
 so clay rings dominate, but {{ ns_large_0 }} quarters held finds of more than {{ 50 | param }} million
 Sm³ o.e. each: Troll, Statfjord, Ekofisk, Oseberg. Together that era found {{ ns_vol_0 | volume }}.
 
@@ -267,7 +267,7 @@ data: [quarters, land_ns, fields_ns, licences_ns]
 register: outcrop
 state: { era: 0 }
 title: Big finds belong to the North Sea's first decades; the last ten years drilled more accurately and found little
-subtitle: Wildcats by quarter-block and era; rings = wells, disc = volume found, colour = success and size
+subtitle: Exploration wellbores by quarter-block and era; rings = wells, disc = volume found, colour = success and size
 source: sodir
 confidence: derived
 unit: wells; million Sm³ o.e.
@@ -277,9 +277,9 @@ exception: { rule: direct-labels, reason: "Hundreds of glyphs: a bivariate legen
 :::
 
 ::: step {beat=twist kicker="1986–2005"}
-### From 1986 the hit rate climbed and the wells moved in around existing fields
+### From 1986 the success rate climbed and the wells moved in around existing fields
 
-The hit rate climbed and the glyphs gathered around the fields already found: Tampen, Oseberg,
+The success rate climbed and the glyphs gathered around the fields already found: Tampen, Oseberg,
 Sleipner. Most discs turn pale. Only {{ ns_large_1 }} quarters held a large find, and the era found
 {{ ns_vol_1 | volume }}.
 
@@ -304,7 +304,7 @@ era: 2
 ::: step {beat=twist kicker="2016–2025"}
 ### The last decade brought more accurate drilling and smaller finds
 
-The hit rate has risen to {{ ns_rate_3 | pct }} and blue rings are now common: {{ ns_above_3 }} of the {{ ns_cells_3 }} quarters drilled beat the
+The success rate has risen to {{ ns_rate_3 | pct }} and blue rings are now common: {{ ns_above_3 }} of the {{ ns_cells_3 }} quarters drilled beat the
 average, and {{ ns_multi_3 }} were drilled three times or more. But every disc is pale. The best
 quarter of the decade found {{ ns_top_last | volume }}; the whole North Sea found {{ ns_vol_3 | volume }}.
 
@@ -315,10 +315,10 @@ era: 3
 :::
 
 ::: step {beat=twist kicker="Licences today"}
-### The last decade's wildcats sit inside today's licences
+### The last decade's exploration wellbores sit inside today's licences
 
 With the {{ ns_licences }} present-day licences drawn in, the pattern is plain: the last decade's
-wildcats sit almost entirely inside acreage that is already licensed around producing fields.
+exploration wellbores sit almost entirely inside acreage that is already licensed around producing fields.
 
 ```chart
 use: glyphs
@@ -329,13 +329,13 @@ lic: true
 
 ## What the next decade looks like
 
-The pattern is consistent. Norway keeps its hit rate by drilling where the rocks are known and the pipes already
+The pattern is consistent. Norway keeps its success rate by drilling where the rocks are known and the pipes already
 exist. That brings smaller finds, quicker wells and, where a platform is close, quicker development: the
-{{ platform_2020s }} wildcats drilled from an existing platform since 2020 show the best case, with several in production
+{{ platform_2020s }} exploration wellbores drilled from an existing platform since 2020 show the best case, with several in production
 almost at once. Small finds are worth developing mainly when a platform is close and has spare capacity, and that
 capacity shrinks as fields age and shut down.
 
-The coming decade will likely look the same: about half of wildcats finding something, most of it small, and the best of
+The coming decade will likely look the same: about half of exploration wellbores finding something, most of it small, and the best of
 it produced quickly through existing platforms while they last. {{ eval_2020s | pct }} of the discoveries since 2020 are
 still under evaluation, so how many of them reach production is not yet settled. A large new find, as Johan Sverdrup was
 in 2010, remains possible but cannot be planned for. *Interpreted.*
