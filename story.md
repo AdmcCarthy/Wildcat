@@ -27,15 +27,21 @@ sources:
     url: https://www.norskpetroleum.no/en/exploration/exploration-activity/
     accessed: 2026-11-07
     note: Volume discovered each year, million Sm³ o.e.; 2025 is preliminary
+  sodir_relief:
+    name: Sodir FactPages and FactMaps; base map Relief (Copernicus DEM GLO-90, EMODnet Bathymetry)
+    url: https://github.com/AdmcCarthy/Relief
+    accessed: 2026-11-09
+    note: Wells, fields and licences from Sodir (NLOD 2.0). Land heights Copernicus DEM GLO-90 © DLR e.V. 2010-2014 and © Airbus 2014-2018, provided under COPERNICUS by the European Union and ESA; sea-floor depths EMODnet Bathymetry Consortium (2024), generalised by Relief to a 4 km cell (shelf map) and a 2 km cell (North Sea map).
 data:
   wildcats: data/wildcats.csv
   yearly: data/yearly.csv
   wells: data/wells_recent.geojson
   fields: data/fields.geojson
+  relief: data/relief_shelf.json
   land: data/land.geojson
   borders: data/borders.geojson
   ns_quarters: data/ns_quarters.json
-  land_ns: data/land_ns.geojson
+  relief_ns: data/relief_ns.json
   fields_ns: data/fields_ns.geojson
   licences_ns: data/licences_ns.geojson
 ---
@@ -111,11 +117,11 @@ that already produce.
 id: map
 type: custom
 module: figures/map.js
-data: [wells, fields, land, borders]
+data: [wells, fields, relief, land, borders]
 state: { colour: result }
 title: Most of the last decade's exploration wellbores were drilled next to existing fields
 subtitle: Exploration wellbores completed 2016–2025, with field outlines
-source: sodir
+source: sodir_relief
 confidence: observed
 notes: Distance is to the nearest field whose development plan was approved before the well was spudded.
 exception: { rule: north-up, reason: "Map rotated so the shelf runs up the panel; a north arrow marks the turn." }
@@ -263,12 +269,12 @@ id: glyphs
 export: true
 type: custom
 module: figures/glyphs.js
-data: [quarters, land_ns, fields_ns, licences_ns]
+data: [quarters, relief_ns, fields_ns, licences_ns]
 register: outcrop
 state: { era: 0 }
 title: Big finds belong to the North Sea's first decades; the last ten years drilled more accurately and found little
 subtitle: Exploration wellbores by quarter-block and era; rings = wells, disc = volume found, colour = success and size
-source: sodir
+source: sodir_relief
 confidence: derived
 unit: wells; million Sm³ o.e.
 notes: Success is shrunk towards the North Sea average (three-well prior) so one well does not make an outlier. Volume is attributed to the well that made each discovery (field volumes to the founding discovery); discoveries rated production unlikely have no published volume and count as zero.

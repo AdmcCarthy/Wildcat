@@ -1,11 +1,12 @@
 // North Sea glyph map: one glyph per quarter-block (a Sodir block cut into four) and era.
-//   rings  = wildcats drilled there in the era (one ring each), coloured by success vs the North Sea average
+//   rings  = exploration wellbores drilled there in the era (one ring each), coloured by success vs the North Sea average
 //   centre = volume discovered (area), filled with a 3x3 bivariate colour:
 //            across: technical success below / around / above the average (diverging, clay - grey - blue)
 //            down:   volume per new discovery small / medium / large (pale -> deep)
 // After Nadieh Bremer's rings-and-discs glyphs (Visual Cinnamon) and Joshua Stevens' bivariate guide.
 // state: { era: 0..3, lic: true|false }
 import { tok, tip, vol, pct, scheme, reducedMotion } from "./common.js";
+import { paintCanvas } from "./relief.js";
 
 const BIV = {  // [y][x]: y = volume class (0 small .. 2 large), x = success class (0 below .. 2 above)
   light: [["#f2be9c", "#babec2", "#9ad3f5"], ["#cb8a5d", "#8a9095", "#57a5d0"], ["#9c5313", "#585f64", "#00729f"]],
@@ -13,7 +14,7 @@ const BIV = {  // [y][x]: y = volume class (0 small .. 2 large), x = success cla
 };
 const ringCol = (x) => BIV[scheme()][1][x];
 
-export default function create(el, { quarters: Q, land_ns: LAND, fields_ns: FL, licences_ns: LIC }, opts = {}) {
+export default function create(el, { quarters: Q, relief_ns: R, fields_ns: FL, licences_ns: LIC }, opts = {}) {
   const S = Q.summary;
   el.innerHTML = "";
   const wrap = d3.select(el).append("div").attr("class", "wcg-wrap").classed("is-export", !!opts.export);
@@ -35,7 +36,7 @@ export default function create(el, { quarters: Q, land_ns: LAND, fields_ns: FL, 
       </div>
       <div class="wcg-compact"><span class="wcg-mini">${[2, 1, 0].map((y) => [0, 1, 2].map((x) => cell(y, x)).join("")).join("")}</span><span>↑ bigger finds per discovery<br>→ above the ${avg} average</span></div>
       <div class="wcg-keys">
-        <div class="wcg-key"><svg width="116" height="40" aria-hidden="true">${[1, 3, 6].map((n, k) => `<g transform="translate(${16 + k * 42},18)">${Array.from({ length: n }, (_, i) => `<circle r="${3.5 + i * 2}" fill="none" stroke="currentColor" stroke-width=".8" opacity=".75"/>`).join("")}<text y="21" text-anchor="middle" font-size="10" fill="currentColor">${n}</text></g>`).join("")}</svg><span>Rings: wildcats drilled</span></div>
+        <div class="wcg-key"><svg width="116" height="40" aria-hidden="true">${[1, 3, 6].map((n, k) => `<g transform="translate(${16 + k * 42},18)">${Array.from({ length: n }, (_, i) => `<circle r="${3.5 + i * 2}" fill="none" stroke="currentColor" stroke-width=".8" opacity=".75"/>`).join("")}<text y="21" text-anchor="middle" font-size="10" fill="currentColor">${n}</text></g>`).join("")}</svg><span>Rings: exploration wellbores drilled</span></div>
         <div class="wcg-key wcg-discs">${[10, 100, 1000].map((v) => `<span class="wcg-d">${disc(v)}<small>${v.toLocaleString("en-GB")}</small></span>`).join("")}<span>Disc area: volume found, million Sm³ o.e.</span></div>
       </div>
       <p class="wcg-how">Each glyph is one quarter of a Sodir block in one era. No disc means no new discovery there; the ring colour still shows whether its wells beat the average.</p>
@@ -87,7 +88,7 @@ export default function create(el, { quarters: Q, land_ns: LAND, fields_ns: FL, 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, geo.W, geo.H);
     const path = d3.geoPath(geo.proj, ctx);
-    ctx.beginPath(); path(LAND); ctx.fillStyle = tok("surface-raised"); ctx.fill();
+    paintCanvas(ctx, R, path);
     ctx.beginPath();
     Q.grid.forEach(([a, b, c, e]) => { const p = [[a, b], [c, b], [c, e], [a, e]].map((q) => geo.proj(q)); ctx.moveTo(...p[0]); p.slice(1).forEach((q) => ctx.lineTo(...q)); ctx.closePath(); });
     ctx.strokeStyle = tok("grid"); ctx.lineWidth = 0.35; ctx.stroke();
@@ -125,7 +126,7 @@ export default function create(el, { quarters: Q, land_ns: LAND, fields_ns: FL, 
     g.on("pointermove", (ev) => {
       const t = ev.target.closest("g[data-i]"); if (!t) return;
       const c = cells[+t.dataset.i], cls = ["below", "around", "above"][c.x];
-      tip().show(`<b>Quarter ${c.q}</b> <span class="ss-k">${S.eras[c.era]}</span><br>${c.wells} wildcat${c.wells > 1 ? "s" : ""}, ${c.hits} found oil or gas<br>
+      tip().show(`<b>Quarter ${c.q}</b> <span class="ss-k">${S.eras[c.era]}</span><br>${c.wells} exploration wellbore${c.wells > 1 ? "s" : ""}, ${c.hits} found oil or gas<br>
         <span class="ss-k">Success ${cls} the ${pct(S.avg)} average (adjusted ${pct(c.rate)})</span>
         ${c.disc ? `<br>${c.disc} new discover${c.disc > 1 ? "ies" : "y"}: ${vol(c.vol)}${c.names.length ? `<br><span class="ss-k">${c.names.join(", ")}</span>` : ""}` : "<br><span class='ss-k'>No new discovery</span>"}`, ev.clientX, ev.clientY);
     }).on("pointerleave", () => tip().hide());

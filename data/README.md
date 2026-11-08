@@ -14,6 +14,7 @@ Everything else is built by `scripts/build_data.py`. Accessed 2026-11-07.
 | `wells_recent.geojson`, `fields.geojson`, `land.geojson`, `borders.geojson` | Map layers |
 | `ns_quarters.json` | North Sea glyph map: every Sodir block cut into four equal quarters (ED50, 10' x 7.5'); per quarter and era wells, hits, adjusted success, new discoveries, attributed volume and bivariate classes (`scripts/build_blocks.py`) |
 | `land_ns.geojson`, `fields_ns.geojson`, `licences_ns.geojson` | North Sea base map; present-day licences merged into one outline |
+| `relief_shelf.json`, `relief_ns.json` | Relief base maps (land and sea-floor layers in lon/lat) for the shelf map and the quarter-block map; `scripts/build_relief_base.py <Relief dir>` builds them from a Relief data release. Copernicus DEM GLO-90 and EMODnet Bathymetry, via Relief |
 
 Definitions: see the module docstring of `scripts/build_data.py` and the page appendix. Check: wildcat
 counts per year match Sodir's own completed-wildcat series within two wells (tests).

@@ -15,6 +15,13 @@ A [SubScout](https://github.com/AdmcCarthy/SubScout) story (v0.5.0): `story.md`,
 quoted number with method, source and confidence) and `figures/` (connected scatterplot, map,
 time-to-production chart, North Sea quarter-block glyph map with a bivariate colour scale).
 
+Both maps sit on [Relief](https://github.com/AdmcCarthy/Relief) (Copernicus DEM GLO-90 and EMODnet Bathymetry), drawn in its
+Detuned style at context strength so the wells and glyphs stay the strongest marks. The layers are converted to longitude and
+latitude once, in `scripts/build_relief_base.py`, so base and Sodir overlays are projected together in the browser. The North Sea
+map uses Relief's `north_sea` region. Relief has no single region over the whole shelf, so the shelf map joins `north_sea`,
+`norwegian_sea` and `barents_sea`; beyond them (Sweden, Finland, the Baltic) it draws a flat tint and the plain Sodir land outline,
+which shows as a straight edge. A shelf region in Relief would remove it.
+
 ```
 uv sync --all-groups
 uv run python scripts/fetch_sodir.py   # -> data/raw (Sodir FactPages, FactMaps; not committed)

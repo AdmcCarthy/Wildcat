@@ -6,7 +6,7 @@ import { pal, tok, tip, fmt1 } from "./common.js";
 export default function create(el, { lead: L }, opts = {}) {
   if (opts.legendEl) {
     const C = pal();
-    opts.legendEl.innerHTML = `<div class="wc-legend"><span><i style="background:${C.early}"></i>Developed discovery</span><span><i style="background:${C.late}"></i>Wildcat drilled from an existing platform</span></div>`;
+    opts.legendEl.innerHTML = `<div class="wc-legend"><span><i style="background:${C.early}"></i>Developed discovery</span><span><i style="background:${C.late}"></i>Exploration wellbore drilled from an existing platform</span></div>`;
   }
   el.innerHTML = "";
   const svg = d3.select(el).append("svg").style("display", "block").style("width", "100%");
