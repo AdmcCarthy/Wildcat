@@ -202,7 +202,7 @@ def main(raw: Path, out: Path) -> None:
     lines = [{"type": "Feature", "properties": {}, "geometry": json.loads(json.dumps(shapely.set_precision(shape(ft["geometry"]).intersection(frame).simplify(0.02), 0.01).__geo_interface__))}
              for ft in sb["features"] if ft.get("geometry")]
     (out / "borders.geojson").write_text(json.dumps({"type": "FeatureCollection", "features": [x for x in lines if x["geometry"].get("coordinates") or x["geometry"].get("geometries")]}))
-    print(f"{len(wells)} wildcats {wells.year.min()}–{wells.year.max()}; {int(wells.new_discovery.sum())} discoveries; "
+    print(f"{len(wells)} exploration wellbores {wells.year.min()}–{wells.year.max()}; {int(wells.new_discovery.sum())} discoveries; "
           f"{int(wells.commercial.sum())} developed; {len(pts)} recent wells mapped")
 
 

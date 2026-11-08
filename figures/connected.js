@@ -29,7 +29,7 @@ export default function create(el, { journey: J }, opts = {}) {
       g.append("line").attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(v)).attr("y2", y(v)).attr("stroke", tok("grid"));
       g.append("text").attr("class", "wc-axis").attr("x", m.l - 8).attr("y", y(v)).attr("dy", "0.35em").attr("text-anchor", "end").text(d3.format(",")(Math.round(v * f)));
     });
-    g.append("text").attr("class", "wc-title").attr("x", W - m.r).attr("y", H - 6).attr("text-anchor", "end").text("Technical success rate: wildcats that found oil or gas →");
+    g.append("text").attr("class", "wc-title").attr("x", W - m.r).attr("y", H - 6).attr("text-anchor", "end").text("Technical success rate: exploration wellbores that found oil or gas →");
     g.append("text").attr("class", "wc-title").attr("x", m.l - (narrow ? 36 : 50)).attr("y", m.t - 8).text(`↑ Volume per new discovery, million ${unit().short}${unit().short === "Sm³" ? " o.e." : ""} (log)`);
     if (!narrow) {
       g.append("text").attr("class", "wc-hint").attr("x", W - m.r - 4).attr("y", m.t + 14).attr("text-anchor", "end").text("big finds, often");
