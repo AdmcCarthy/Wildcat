@@ -28,7 +28,7 @@ sources:
     accessed: 2026-11-07
     note: Volume discovered each year, million Sm³ o.e.; 2025 is preliminary
 data:
-  exploration wellbores: data/exploration wellbores.csv
+  wildcats: data/wildcats.csv
   yearly: data/yearly.csv
   wells: data/wells_recent.geojson
   fields: data/fields.geojson
