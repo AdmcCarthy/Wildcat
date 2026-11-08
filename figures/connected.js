@@ -62,7 +62,7 @@ export default function create(el, { journey: J }, opts = {}) {
       lab.append("text").attr("class", "wc-year").attr("x", x(p.x) + 8).attr("y", y(p.y) - 6).text(narrow ? String(p.year) : t);
     });
     svg.append("g").selectAll("circle").data(vis).join("circle").attr("cx", (p) => x(p.x)).attr("cy", (p) => y(p.y)).attr("r", 12).attr("fill", "transparent")
-      .on("pointermove", (ev, p) => tip().show(`<b>${p.year}</b> <span class="ss-k">(${p.year - 1}–${p.year + 1} average)</span><br>Technical success ${pct(p.x)}<br>Per new discovery ${vol(p.y)}<br><span class="ss-k">${p.wildcats} wildcats a year</span>`, ev.clientX, ev.clientY))
+      .on("pointermove", (ev, p) => tip().show(`<b>${p.year}</b> <span class="ss-k">(${p.year - 1}–${p.year + 1} average)</span><br>Technical success ${pct(p.x)}<br>Per new discovery ${vol(p.y)}<br><span class="ss-k">${p.wildcats} exploration wellbores a year</span>`, ev.clientX, ev.clientY))
       .on("pointerleave", () => tip().hide());
   }
   return { draw, repaint() { if (W) draw(W, cur); } };
