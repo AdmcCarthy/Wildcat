@@ -22,3 +22,10 @@ Voice and structure of written work (README, docs, published pages) follow Idiom
   era prepared only near view in idle time (perf gate). Phones: compact legend, map <= vh - 530.
 - Print plates: `export: true` figures are rendered by Plate (github.com/AdmcCarthy/Plate, pinned by tag) in the Pages workflow: PDF at A3 and A1 and PNG, listed on `/plates/` by `scripts/build_plates_index.py`. SubScout >= 0.6 no longer renders (`subscout export` only points to Plate).
 
+## Idiom (private repo)
+
+Idiom is Adam McCarthy's private repo (`github.com/AdmcCarthy/Idiom`; `gh repo clone AdmcCarthy/Idiom` with access, normally linked at
+`../../shared/idiom`) of voice, house style, working rules and the lookup tables agents use first: `DIRECTORY.md` says which repo already
+does a job, `DATASETS.md` gives every dataset's terms, attribution line and status. Read the relevant one before choosing a repo or
+using data, and update it when you learn something new. Never copy anything from its `personal/` or `working/` folders into this repo
+or quote it in public output; if the folder is not available, say so and carry on with this file.
