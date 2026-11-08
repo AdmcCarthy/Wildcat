@@ -356,6 +356,11 @@ in 2010, remains possible but cannot be planned for. *Interpreted.*
 - **Volume per discovery**: Sodir's gross resource growth for the year divided by that year's new
   discoveries. These are today's estimates of what was found.
 
+### Print files
+
+The two figures with an export page, the connected scatterplot and the North Sea glyph map, are available as vector PDF
+(A3 and A1) and as PNG in the [print files](plates/) list.
+
 ### Glossary
 
 - **Sm³ o.e.**: standard cubic metres of oil equivalent; one is {{ 6.29 | param }} barrels of oil equivalent.

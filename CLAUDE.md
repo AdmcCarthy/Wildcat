@@ -16,3 +16,5 @@ Owner: Adam McCarthy, petroleum geoscience domain expert. Follow SubScout's CLAU
   (wells) + disc (volume, area) with a 3x3 diverging bivariate fill (x: success vs North Sea average,
   clay-grey-blue; y: volume per discovery, pale-deep). Base map and licences on canvas, one SVG layer per
   era prepared only near view in idle time (perf gate). Phones: compact legend, map <= vh - 530.
+- Print plates: `export: true` figures are rendered by Plate (github.com/AdmcCarthy/Plate, pinned by tag) in the Pages workflow: PDF at A3 and A1 and PNG, listed on `/plates/` by `scripts/build_plates_index.py`. SubScout >= 0.6 no longer renders (`subscout export` only points to Plate).
+

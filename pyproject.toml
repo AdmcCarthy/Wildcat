@@ -4,7 +4,8 @@ version = "0.1.0"
 description = "Wildcat: a SubScout data story on fifty years of Norwegian exploration wells"
 requires-python = ">=3.12"
 dependencies = [
-    "subscout[export]",
+    "subscout",
+    "plate",
 ]
 
 [dependency-groups]
@@ -22,7 +23,8 @@ dev = ["pytest>=8", "ruff>=0.6"]
 package = false
 
 [tool.uv.sources]
-subscout = { git = "https://github.com/AdmcCarthy/SubScout", tag = "v0.5.0" }
+subscout = { git = "https://github.com/AdmcCarthy/SubScout", tag = "v0.6.0" }
+plate = { git = "https://github.com/AdmcCarthy/Plate", tag = "v0.1.0" }
 
 [tool.pytest.ini_options]
 pythonpath = ["scripts"]

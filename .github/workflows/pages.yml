@@ -27,10 +27,11 @@ jobs:
         run: uv run subscout build . --out _site
       - name: No build warnings (untraced numbers, unused metrics, arc beats)
         run: python3 -c 'import json,sys;w=json.load(open("_site/build-report.json"))["warnings"];print("\n".join(w));sys.exit(1 if w else 0)' 
-      - name: Render high-resolution images for export pages (3x, headless Chromium)
+      - name: Print-grade plates for the export figures (PDF at A3 and A1, PNG; Plate, headless Chromium)
         run: |
           uv run playwright install --with-deps chromium
-          uv run subscout export _site
+          uv run plate render _site --size a3-landscape --size a1-landscape --dpi 150 --density rich --legend rail --all-states --format pdf --format png --out _site/plates
+          uv run python scripts/build_plates_index.py _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

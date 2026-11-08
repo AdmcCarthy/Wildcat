@@ -21,9 +21,10 @@ uv run python scripts/fetch_sodir.py   # -> data/raw (Sodir FactPages, FactMaps;
 uv run python scripts/build_data.py    # -> data/
 uv run python scripts/build_blocks.py  # -> data/ns_quarters.json (North Sea glyph map)
 uv run subscout build . --out _site    # -> the page
-uv run subscout export _site           # -> high-resolution PNGs for export/ pages (needs Playwright)
+uv run plate render _site --size a3-landscape --size a1-landscape --dpi 150 --density rich --legend rail --all-states --out _site/plates   # PDF + PNG plates (Plate)
+uv run python scripts/build_plates_index.py _site   # -> _site/plates/index.html
 uv run pytest                          # checks against Sodir's series + every quoted number
 ```
 
 Data: Sodir (Norwegian Offshore Directorate), NLOD 2.0; definitions in [`data/README.md`](data/README.md)
-and on the page under "How we know". Code: MIT.
+and on the page under "Basis of analysis". Code: MIT.

@@ -87,3 +87,18 @@ def test_north_sea_quarters():
     for c in q["cells"]:
         lo, hi = sorted([c["raw"], s["avg"]])
         assert lo - 1e-3 <= c["rate"] <= hi + 1e-3
+
+
+def test_plates_index_lists_every_file_by_figure():
+    from build_plates_index import render
+
+    manifest = {"files": [
+        {"figure": "journey", "state": "2016-2025", "size": "a3-landscape", "format": "pdf", "w_mm": 420, "h_mm": 297, "bytes": 200000, "file": "journey/a3.pdf", "qa": []},
+        {"figure": "journey", "state": "2016-2025", "size": "a3-landscape", "format": "png", "px": [2480, 1754], "dpi": 150, "bytes": 300000, "file": "journey/a3.png", "qa": []},
+        {"figure": "glyphs", "state": "Licences today", "size": "a1-landscape", "format": "pdf", "w_mm": 841, "h_mm": 594, "bytes": 900000, "file": "glyphs/a1.pdf", "qa": [{"kind": "x"}]},
+    ]}
+    page = render(manifest, "Title", "Sodir")
+    for f in manifest["files"]:
+        assert f'href="{f["file"]}"' in page
+    assert "420 × 297 mm" in page and "2480 × 1754 px, 150 dpi" in page and "(QA: check)" in page
+    assert page.index("Journey") < page.index("Glyphs")
