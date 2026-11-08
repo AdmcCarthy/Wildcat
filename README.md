@@ -1,9 +1,9 @@
 # Wildcat
 
-**Still striking, finding less: fifty years of Norwegian wildcat wells.**
+**Still striking, in smaller pieces: fifty years of Norwegian wildcat wells.**
 Live page: https://admccarthy.github.io/Wildcat/
 
-"Wildcat" is the repository's name; the page is titled *Still striking, finding less*. Every
+"Wildcat" is the repository's name; the page is titled *Still striking, in smaller pieces*. Every
 exploration wildcat on the Norwegian continental shelf since 1966, from Sodir's public data: how often
 wildcats find oil or gas (technical success), how much each discovery holds, how many discoveries are
 developed (commercial success) and how long they take to produce. The key figure is a connected

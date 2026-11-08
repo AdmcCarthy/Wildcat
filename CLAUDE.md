@@ -1,7 +1,7 @@
 # Wildcat: working rules
 
 A SubScout story (github.com/AdmcCarthy/SubScout, pinned tag) on Norwegian exploration wildcats.
-"Wildcat" is only the repo name; the page is titled *Still striking, finding less*.
+"Wildcat" is only the repo name; the page is titled *Still striking, in smaller pieces*.
 Owner: Adam McCarthy, petroleum geoscience domain expert. Follow SubScout's CLAUDE.md and styleguide.
 
 - Arc `reveal`: claim (hit rate ~half) -> evidence (near-field, APA, faster wells) -> twist (smaller

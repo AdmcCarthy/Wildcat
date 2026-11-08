@@ -1,7 +1,7 @@
 ---
-title: Still striking, finding less
-short_title: "Still striking, finding less"
-dek: Norway's wildcat wells still find oil or gas about half the time. They do it by drilling close to what is already there, and each find is a fraction of what it used to be.
+title: Still striking, in smaller pieces
+short_title: "Still striking, in smaller pieces"
+dek: "Norway's wildcat wells still find oil or gas about half the time. They do it by drilling close to what is already there: each find is a fraction of what it used to be, the wells are quicker, and a few drilled from a platform reached production almost at once."
 kicker: NCS · Exploration wells 1966–2026 · Sodir
 byline: Adam McCarthy
 date: 2026-11-07
@@ -47,7 +47,7 @@ side by side and two measures tell most of the story: how often a wildcat finds 
 much each new discovery holds.
 
 ::: step {beat=claim kicker="1990–1999" layout=wide}
-### Four in ten, and big
+### In the 1990s four in ten wildcats struck, and each find was large
 
 Each point is a year, averaged with its neighbours. Across: the share of wildcats that found oil or
 gas. Up: the volume found per new discovery, on a log scale. In the 1990s {{ tech_1990s | pct }} of
@@ -72,7 +72,7 @@ exception: { rule: log-scale, reason: "Volume per discovery spans more than an o
 :::
 
 ::: step {beat=claim kicker="2000–2015"}
-### More hits, then a giant
+### The hit rate rose in the 2000s, and Johan Sverdrup arrived in 2010
 
 The 2000s pushed the hit rate up to {{ tech_2000s | pct }}, while each discovery shrank to
 {{ vol_disc_2000s | volume }}. Then 2010 stands out: Johan Sverdrup
@@ -86,7 +86,7 @@ upto: 2015
 :::
 
 ::: step {beat=claim kicker="2016–2025"}
-### Still about half
+### The hit rate has held at about half for twenty years
 
 In the last decade {{ n_last }} wildcats were completed and {{ tech_last | pct }} of them found oil or
 gas: {{ disc_last }} new discoveries. Sodir calls that high by international standards, and it has
@@ -102,7 +102,7 @@ highlight: [2016, 2025]
 ## How the hit rate holds up
 
 ::: step {beat=evidence kicker="Where they drill"}
-### Close to home
+### Almost all recent wildcats sit among producing fields
 
 The wildcats of the last decade, in green where they found oil or gas. Almost all sit among the fields
 that already produce.
@@ -123,7 +123,7 @@ exception: { rule: north-up, reason: "Map rotated so the shelf runs up the panel
 :::
 
 ::: step {beat=evidence kicker="Near-field"}
-### Within reach of a platform
+### Most recent wildcats were within reach of an approved field
 
 {{ near_last | pct }} of those wildcats were drilled within {{ 25 | param }} km of a field already
 approved for development, up from {{ near_1990s | pct }} in the 1990s. A find there can be tied back
@@ -136,7 +136,7 @@ colour: near
 :::
 
 ::: step {beat=evidence kicker="Licences"}
-### Mature acreage by design
+### Most were drilled in licences from the APA rounds
 
 {{ apa_last | pct }} were in licences from the APA rounds, the annual awards in mature areas around
 existing infrastructure.
@@ -148,7 +148,7 @@ colour: apa
 :::
 
 ::: step {beat=evidence kicker="Speed"}
-### Quicker wells
+### Wildcats now take less time to drill
 
 Wells are faster too. The median wildcat since 2016 took {{ days_last | round:0 }} days to drill,
 against {{ days_2006_15 | round:0 }} in the ten years before.
@@ -168,10 +168,10 @@ unit: days
 ```
 :::
 
-## The twist
+## What lies under the steady hit rate
 
 ::: step {beat=twist kicker="Size"}
-### Each find is smaller
+### The average discovery holds much less than in the 1990s
 
 The same path, with the last decade picked out. It has moved right and down: as many hits, much less
 oil and gas in each. Since 2016 a new discovery has held {{ vol_disc_last | volume }} on average,
@@ -195,7 +195,7 @@ exception: { rule: log-scale, reason: "As in the first view of this figure." }
 :::
 
 ::: step {beat=twist kicker="Outcome"}
-### Fewer reach production
+### Most discoveries of the 2010s are producing, approved or still open
 
 Of the discoveries made in the 2010s, {{ dev_2010s | pct }} are producing or approved,
 {{ eval_2010s | pct }} are still being evaluated and {{ unlikely_2010s | pct }} are unlikely ever to
@@ -220,7 +220,7 @@ notes: Commercial = the discovery is producing, has produced or is approved for 
 :::
 
 ::: step {beat=twist kicker="Time"}
-### Slower, unless the platform is next door
+### Development takes longer, except next to a platform
 
 Developed discoveries also take longer to come on stream. {{ p10_2010s | pct }} of discoveries made
 from 2010 onwards were producing within ten years, against {{ p10_2000s | pct }} of those from the
@@ -252,7 +252,7 @@ the North Sea's long-run hit rate of {{ ns_avg | pct }}, grey around it, blue ab
 finds, deep for large ones.
 
 ::: step {beat=twist kicker="1966–1985" layout=wide}
-### The frontier
+### In the first twenty years few wildcats struck, and the prizes were large
 
 The first twenty years were a lottery with huge prizes. Only {{ ns_rate_0 | pct }} of wildcats struck,
 so clay rings dominate, but {{ ns_large_0 }} quarters held finds of more than {{ 50 | param }} million
@@ -277,7 +277,7 @@ exception: { rule: direct-labels, reason: "Hundreds of glyphs: a bivariate legen
 :::
 
 ::: step {beat=twist kicker="1986–2005"}
-### Filling in
+### From 1986 the hit rate climbed and the wells moved in around existing fields
 
 The hit rate climbed and the glyphs gathered around the fields already found: Tampen, Oseberg,
 Sleipner. Most discs turn pale. Only {{ ns_large_1 }} quarters held a large find, and the era found
@@ -290,7 +290,7 @@ era: 1
 :::
 
 ::: step {beat=twist kicker="2006–2015"}
-### One giant in a mature basin
+### Johan Sverdrup is the one large find of 2006–2015
 
 More of the same, with one exception that stands out on the whole map: the large blue disc on the Utsira
 High is Johan Sverdrup.
@@ -302,7 +302,7 @@ era: 2
 :::
 
 ::: step {beat=twist kicker="2016–2025"}
-### Busy, accurate, small
+### The last decade brought more accurate drilling and smaller finds
 
 The hit rate has risen to {{ ns_rate_3 | pct }} and blue rings are now common: {{ ns_above_3 }} of the {{ ns_cells_3 }} quarters drilled beat the
 average, and {{ ns_multi_3 }} were drilled three times or more. But every disc is pale. The best
@@ -315,7 +315,7 @@ era: 3
 :::
 
 ::: step {beat=twist kicker="Licences today"}
-### Inside today's licences
+### The last decade's wildcats sit inside today's licences
 
 With the {{ ns_licences }} present-day licences drawn in, the pattern is plain: the last decade's
 wildcats sit almost entirely inside acreage that is already licensed around producing fields.
@@ -329,13 +329,16 @@ lic: true
 
 ## What the next decade looks like
 
-The pattern is consistent. Norway keeps its hit rate by drilling where it knows the rocks and already
-has the pipes, and that brings smaller finds. Small finds are worth developing mainly when a platform
-is close and has spare capacity, and that capacity shrinks as fields age and shut down.
+The pattern is consistent. Norway keeps its hit rate by drilling where the rocks are known and the pipes already
+exist. That brings smaller finds, quicker wells and, where a platform is close, quicker development: the
+{{ platform_2020s }} wildcats drilled from an existing platform since 2020 show the best case, with several in production
+almost at once. Small finds are worth developing mainly when a platform is close and has spare capacity, and that
+capacity shrinks as fields age and shut down.
 
-The coming decade will likely look the same: about half of wildcats finding something, most of it
-small, and the best of it produced quickly through existing platforms while they last. A large new
-find, as Johan Sverdrup was in 2010, remains possible but cannot be planned for. *Interpreted.*
+The coming decade will likely look the same: about half of wildcats finding something, most of it small, and the best of
+it produced quickly through existing platforms while they last. {{ eval_2020s | pct }} of the discoveries since 2020 are
+still under evaluation, so how many of them reach production is not yet settled. A large new find, as Johan Sverdrup was
+in 2010, remains possible but cannot be planned for. *Interpreted.*
 
 ::: appendix
 ### Definitions
