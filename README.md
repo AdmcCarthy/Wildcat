@@ -34,4 +34,10 @@ uv run pytest                          # checks against Sodir's series + every q
 ```
 
 Data: Sodir (Norwegian Offshore Directorate), NLOD 2.0; definitions in [`data/README.md`](data/README.md)
-and on the page under "Basis of analysis". Code: MIT.
+and on the page under "Basis of analysis". Code: MIT License with Acknowledgement.
+
+## Licence and acknowledgement
+
+MIT License with Acknowledgement ([LICENSE](LICENSE)): the MIT terms plus one condition. Anything built with this work says so,
+visibly and in plain words, and does not imply endorsement: "Built with Wildcat by Adam McCarthy (https://github.com/AdmcCarthy/Wildcat)". The wording is custom, so
+the licence is not OSI-approved. Third-party data and vendored code keep their own terms.
