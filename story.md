@@ -10,7 +10,7 @@ register: section
 palette: tide
 surface: nordic-cool
 units: sm3
-horizon: true
+horizon: { data: header, height: 80, label: false }
 kpis:
   - { metric: tech_last, filter: pct, label: "of exploration wellbores found oil or gas, 2016–2025" }
   - { metric: vol_disc_last, filter: volume, label: "found per new discovery since 2016" }
@@ -33,6 +33,7 @@ sources:
     accessed: 2026-11-09
     note: Wells, fields and licences from Sodir (NLOD 2.0). Land heights Copernicus DEM GLO-90 © DLR e.V. 2010-2014 and © Airbus 2014-2018, provided under COPERNICUS by the European Union and ESA; sea-floor depths EMODnet Bathymetry Consortium (2024), generalised by Relief to a 4 km cell (shelf map) and a 2 km cell (North Sea map).
 data:
+  header: data/header.json
   wildcats: data/wildcats.csv
   yearly: data/yearly.csv
   wells: data/wells_recent.geojson

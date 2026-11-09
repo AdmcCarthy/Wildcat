@@ -28,3 +28,5 @@ classed small < 5, medium 5-50, large >= 50 million Sm3 o.e. Volume is attribute
 (Sodir's estimate for undeveloped discoveries; field recoverable volume for the discovery that founded a
 field); discoveries rated 'production unlikely' have no published volume and count as zero. Attributed
 volumes cover 67-93 % of Sodir's gross resource growth per decade.
+
+`header.json` is the band in the page's hero: a synthetic seismic section made by `scripts/make_header.py` (seismic_art's `synthetic_hero`), not Sodir data and not a real survey; the page says so.
