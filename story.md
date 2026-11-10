@@ -28,10 +28,10 @@ sources:
     accessed: 2026-11-07
     note: Volume discovered each year, million Sm³ o.e.; 2025 is preliminary
   sodir_relief:
-    name: Sodir FactPages and FactMaps; base map Relief (Copernicus DEM GLO-90, EMODnet Bathymetry)
+    name: Sodir FactPages and FactMaps; base map Relief (Copernicus DEM GLO-90, EMODnet Bathymetry, GEBCO)
     url: https://github.com/AdmcCarthy/Relief
     accessed: 2026-11-09
-    note: Wells, fields and licences from Sodir (NLOD 2.0). Land heights Copernicus DEM GLO-90 © DLR e.V. 2010-2014 and © Airbus 2014-2018, provided under COPERNICUS by the European Union and ESA; sea-floor depths EMODnet Bathymetry Consortium (2024), generalised by Relief to a 4 km cell (shelf map) and a 2 km cell (North Sea map).
+    note: Wells, fields and licences from Sodir (NLOD 2.0). Land heights Copernicus DEM GLO-90 © DLR e.V. 2010-2014 and © Airbus 2014-2018, provided under COPERNICUS by the European Union and ESA; sea-floor depths EMODnet Bathymetry Consortium (2024), generalised by Relief to a 4 km cell (shelf map) and a 2 km cell (North Sea map); beyond Relief's European regions the shelf map is filled from the GEBCO 2026 Grid (GEBCO; public domain, acknowledged), at a 20 km cell, not for navigation.
 data:
   header: data/header.json
   wildcats: data/wildcats.csv
@@ -126,7 +126,7 @@ subtitle: Exploration wellbores completed 2016–2025, with field outlines
 source: sodir_relief
 confidence: observed
 notes: Distance is to the nearest field whose development plan was approved before the well was spudded.
-exception: { rule: north-up, reason: "Map rotated so the shelf runs up the panel; a north arrow marks the turn." }
+exception: { rule: north-up, reason: "Map rotated so the shelf runs along the panel, north to the left (up the panel on a phone); a north arrow marks the turn." }
 ```
 :::
 

@@ -8,9 +8,11 @@ longitude and latitude here, the frame the Sodir overlays (wells, fields, licenc
 together in the browser, so base and overlays cannot drift apart.
 
 - relief_ns.json: the `north_sea` region at its regional level of detail (0.9 km cell), for the quarter-block glyph map.
-- relief_shelf.json: `north_sea`, `norwegian_sea` and `barents_sea` at their overview level (2 km cell; 4 km for the Barents Sea), joined without overlap
-  (the finer region wins where two meet), for the shelf-wide map. Relief has no single region over 56 to 74 N, so the join is
-  clipped to the area the three regions cover; the maps clip the base to `coverage`.
+- relief_shelf.json: `north_sea`, `norwegian_sea` and `barents_sea` at their overview level (2 km cell; 4 km for the Barents Sea), then `ne_europe`
+  (UK, Denmark, Germany, Poland and southern Sweden; 4 km cell) and `atlantic` (GEBCO 2026; 20 km cell, the coarsest, so it only fills what the
+  others leave), joined without overlap (the earlier region wins where two meet), for the shelf-wide map. Relief has no single region over the
+  whole shelf, so the base is this join, clipped to a frame wide enough for the map at any shape (46 W to 62 E, 47 to 80 N); the maps clip the base to `coverage`, which reaches the whole frame, so no
+  flat tint is left beyond Norway (Sweden, Finland, Denmark, the UK, the Baltic). The North Sea base needs none of this: it sits inside `north_sea`.
 
 Each feature carries `kind` (land or sea), `level` (m, the stack threshold; negative for sea) and `mid` (m, depth below or height above sea level at the mid-point
 to the next level, which sets its colour). Paint land and sea features in ascending `mid` order.
@@ -34,6 +36,8 @@ ATTRIBUTION = (
     "Base map: Relief (github.com/AdmcCarthy/Relief), Copernicus DEM GLO-90 © DLR e.V. 2010-2014 and © Airbus 2014-2018, "
     "provided under COPERNICUS by the European Union and ESA; EMODnet Bathymetry Consortium (2024), EMODnet Digital Bathymetry (DTM)."
 )
+# the shelf base also fills beyond Relief's European regions from GEBCO (the Atlantic region)
+ATTRIBUTION_SHELF = ATTRIBUTION[:-1] + "; outside those, the GEBCO 2026 Grid (GEBCO; public domain, acknowledged), not for navigation."
 
 
 def _region(relief: Path, rid: str) -> dict:
@@ -85,7 +89,7 @@ def layers(relief: Path, rid: str, lod: str, frame, zone) -> list[dict]:
     return out
 
 
-def build(relief: Path, specs: list[tuple[str, str]], frame, name: str) -> None:
+def build(relief: Path, specs: list[tuple[str, str]], frame, name: str, attribution: str = ATTRIBUTION) -> None:
     taken = None
     feats: list[dict] = []
     for rid, lod in specs:  # finest region first: it wins where regions meet
@@ -100,7 +104,7 @@ def build(relief: Path, specs: list[tuple[str, str]], frame, name: str) -> None:
         "crs": "EPSG:4326",
         "regions": [rid for rid, _ in specs],
         "coverage": mapping(coverage),
-        "attribution": ATTRIBUTION,
+        "attribution": attribution,
         "features": sorted(feats, key=lambda f: (f["properties"]["kind"] != "sea", f["properties"]["mid"])),
     }
     p = OUT / name
@@ -111,4 +115,5 @@ def build(relief: Path, specs: list[tuple[str, str]], frame, name: str) -> None:
 if __name__ == "__main__":
     relief = Path(sys.argv[1])
     build(relief, [("north_sea", "regional")], box(-0.5, 55.0, 9.0, 63.0), "relief_ns.json")
-    build(relief, [("north_sea", "overview"), ("norwegian_sea", "overview"), ("barents_sea", "overview")], box(-2.0, 55.0, 42.0, 77.0), "relief_shelf.json")
+    specs = [("north_sea", "overview"), ("norwegian_sea", "overview"), ("barents_sea", "overview"), ("ne_europe", "overview"), ("atlantic", "overview")]
+    build(relief, specs, box(-46.0, 47.0, 62.0, 80.0), "relief_shelf.json", ATTRIBUTION_SHELF)

@@ -1,9 +1,10 @@
-// Exploration wellbores completed 2016–2025 on a map rotated so the shelf runs up the panel (north arrow shows the turn).
+// Exploration wellbores completed 2016–2025 on a map rotated so the shelf runs along a wide panel (north to the left) or up a
+// phone's (north arrow shows the turn).
 // state: { colour: "result" | "near" | "apa" }
 import { pal, tok, tip, scheme } from "./common.js";
 import { paintSvg } from "./relief.js";
 
-const ANGLE = 18;
+const ANGLE_WIDE = 108, ANGLE_NARROW = 18; // wide: the shelf runs along the panel (2 : 1); a phone keeps it running up
 export default function create(el, { wells: WL, fields: FL, relief: R, land: LAND, borders: B }, opts = {}) {
   el.innerHTML = "";
   const svg = d3.select(el).append("svg").style("display", "block").style("width", "100%").style("overflow", "hidden");
@@ -19,7 +20,8 @@ export default function create(el, { wells: WL, fields: FL, relief: R, land: LAN
   function draw(width, state = {}, { animate = false } = {}) {
     state = { colour: "result", ...state }; W = width; cur = state; legend(state);
     const C = pal(), vh = window.innerHeight || 800;
-    const H = Math.round(W < 560 ? Math.max(240, vh * 0.36) : Math.max(360, Math.min(W * 1.05, vh * (opts.vhShare ?? 0.66))));
+    const narrow = W < 560, ANGLE = narrow ? ANGLE_NARROW : ANGLE_WIDE;
+    const H = Math.round(narrow ? Math.max(240, vh * 0.36) : Math.max(360, Math.min(W / 2, vh * (opts.vhShare ?? 0.66))));
     svg.attr("viewBox", [0, 0, W, H]).attr("role", "img").attr("aria-label", "Map of exploration wellbores completed 2016 to 2025");
     const frame = { type: "FeatureCollection", features: [...WL.features, { type: "Feature", geometry: { type: "MultiPoint", coordinates: [[3.0, 56.0], [8.0, 55.6], [10.6, 57.7]] } }] };
     const proj = d3.geoConicConformal().parallels([60, 72]).rotate([-12, 0]).angle(ANGLE).fitExtent([[10, 10], [W - 10, H - 10]], frame);
@@ -34,7 +36,7 @@ export default function create(el, { wells: WL, fields: FL, relief: R, land: LAN
         .attr("cx", (f) => proj(f.geometry.coordinates)[0]).attr("cy", (f) => proj(f.geometry.coordinates)[1]).attr("r", 4).attr("stroke", tok("text-muted")).attr("stroke-width", 0.8)
         .on("pointermove", (ev, f) => { const p = f.properties; tip().show(`<b>${p.well}</b> <span class="ss-k">${p.year}</span><br>${p.technical ? "Found oil or gas" : "Dry"}${p.commercial_status ? ` · ${p.commercial_status === "developed" ? "developed or approved" : p.commercial_status === "evaluating" ? "being evaluated" : "development unlikely"}` : ""}<br><span class="ss-k">${p.dist == null ? "" : `${p.dist} km from the nearest field · `}${p.apa ? "APA licence" : "licensing round"}</span>`, ev.clientX, ev.clientY); })
         .on("pointerleave", () => tip().hide());
-      const na = svg.append("g").attr("transform", `translate(${W - 20},24) rotate(${ANGLE})`);
+      const na = svg.append("g").attr("transform", `translate(${W - 24},28) rotate(${-ANGLE})`); // d3's angle turns the map counter-clockwise
       na.append("path").attr("d", "M0,-10 L4,6 L0,2 L-4,6 Z").attr("fill", tok("text-muted"));
       na.append("text").attr("class", "wc-note").attr("y", -13).attr("text-anchor", "middle").text("N");
     }

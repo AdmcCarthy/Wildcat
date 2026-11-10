@@ -22,11 +22,16 @@ def test_features_are_lonlat_and_painted_in_order(base):
         mids = [f["properties"]["mid"] for f in base["features"] if f["properties"]["kind"] == kind]
         assert mids == sorted(mids) and mids[0] > 0
     lon0, lat0, lon1, lat1 = shape(base["coverage"]).bounds
-    assert -30 < lon0 < lon1 < 60 and 50 < lat0 < lat1 < 80
+    assert -50 < lon0 < lon1 < 65 and 45 < lat0 < lat1 < 82
 
 
 def test_attribution_names_the_sources(base):
     assert "Copernicus" in base["attribution"] and "EMODnet" in base["attribution"] and "Relief" in base["attribution"]
+
+
+def test_shelf_base_credits_gebco_where_it_fills_the_frame():
+    shelf = json.loads((D / "relief_shelf.json").read_text(encoding="utf-8"))
+    assert "GEBCO" in shelf["attribution"] and "not for navigation" in shelf["attribution"]
 
 
 def test_shelf_base_covers_every_recent_well():
