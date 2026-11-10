@@ -53,7 +53,7 @@ found. {{ n_wildcats }} exploration wellbores have been completed on the Norwegi
 side by side and two measures tell most of the story: how often an exploration wellbore finds oil or gas, and how
 much each new discovery holds.
 
-::: step {beat=claim kicker="1990–1999" layout=wide}
+::: step {beat=claim kicker="1990–1999"}
 ### In the 1990s four in ten exploration wellbores struck, and each find was large
 
 Each point is a year, averaged with its neighbours. Across: the share of exploration wellbores that found oil or
@@ -118,6 +118,7 @@ that already produce.
 id: map
 type: custom
 module: figures/map.js
+detail: high
 data: [wells, fields, relief, land, borders]
 state: { colour: result }
 title: Most of the last decade's exploration wellbores were drilled next to existing fields
@@ -258,7 +259,7 @@ the centre a disc whose area is the volume discovered. Colour says how the quart
 the North Sea's long-run success rate of {{ ns_avg | pct }}, grey around it, blue above; pale for small
 finds, deep for large ones.
 
-::: step {beat=twist kicker="1966–1985" layout=wide}
+::: step {beat=twist kicker="1966–1985" layout=lane}
 ### In the first twenty years few exploration wellbores struck, and the prizes were large
 
 The first twenty years were a lottery with huge prizes. Only {{ ns_rate_0 | pct }} of exploration wellbores struck,
