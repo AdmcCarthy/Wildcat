@@ -56,7 +56,7 @@ export default function create(el, { quarters: Q, relief_ns: R, fields_ns: FL, l
     const fig = el.closest(".ss-figure"), above = fig ? el.getBoundingClientRect().top - fig.getBoundingClientRect().top : 0;
     const room = narrow || !fig ? Infinity : vh - 56 - above - 30;
     // phones: leave room below the pinned panel for the step text (about 330 px on a 740 px screen)
-    let H = opts.export ? Math.round(opts.height()) : Math.round(narrow ? Math.max(190, Math.min(vh * 0.34, vh - 530)) : Math.max(420, Math.min(room, 920)));
+    let H = opts.export ? Math.round(opts.height()) : Math.round(narrow ? Math.max(130, Math.min(vh * 0.27, vh - 625)) : Math.max(420, Math.min(room, 920)));
     // the drilled North Sea: Ekofisk (56.3N) to Tampen (61.6N), west of the empty Skagerrak
     const frame = { type: "MultiPoint", coordinates: [[1.7, 56.25], [7.0, 56.25], [7.0, 61.9], [1.7, 61.9]] };
     const proj = d3.geoConicConformal().parallels([56, 62]).rotate([-5, 0]);

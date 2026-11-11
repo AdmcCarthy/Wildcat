@@ -21,7 +21,7 @@ export default function create(el, { wells: WL, fields: FL, relief: R, land: LAN
     state = { colour: "result", ...state }; W = width; cur = state; legend(state);
     const C = pal(), vh = window.innerHeight || 800;
     const narrow = W < 560, ANGLE = narrow ? ANGLE_NARROW : ANGLE_WIDE;
-    const H = Math.round(narrow ? Math.max(240, vh * 0.36) : Math.max(360, Math.min(W / 2, vh * (opts.vhShare ?? 0.66))));
+    const H = Math.round(narrow ? Math.max(200, vh * 0.28) : Math.max(360, Math.min(W / 2, vh * (opts.vhShare ?? 0.66))));
     svg.attr("viewBox", [0, 0, W, H]).attr("role", "img").attr("aria-label", "Map of exploration wellbores completed 2016 to 2025");
     const frame = { type: "FeatureCollection", features: [...WL.features, { type: "Feature", geometry: { type: "MultiPoint", coordinates: [[3.0, 56.0], [8.0, 55.6], [10.6, 57.7]] } }] };
     const proj = d3.geoConicConformal().parallels([60, 72]).rotate([-12, 0]).angle(ANGLE).fitExtent([[10, 10], [W - 10, H - 10]], frame);
